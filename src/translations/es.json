@@ -1,0 +1,39 @@
+{
+  "site": {
+    "name": "Lisy Shop",
+    "description": "Lisy Shop Centro Habana"
+  },
+  "buttons": {
+    "login": "Iniciar Sesión",
+    "order": "Ordenar",
+    "filter": "Filtrar",
+    "new": "Nuevo",
+    "done": "Aceptar",
+    "ws": "Pidelo Aquí"
+  },
+  "sections": {
+    "related": "Productos relacionados",
+    "categories": "Categorías"
+  },
+  "categories": {
+    "all": "Todos los productos"
+  },
+  "product": {
+    "date": "Fecha",
+    "title": "Título",
+    "description": "Descripcíon",
+    "price": "Precio",
+    "category": "Categoría"
+  },
+  "error": {
+    "required": "{field} es requerido"
+  },
+  "dialog": {
+    "addProduct": "Añadir un nuevo producto",
+    "editProduct": "Editar producto"
+  },
+  "message": {
+    "noData": "No se encuentra ningún producto",
+    "orderProduct": "Hola me interesa el producto {product}"
+  }
+}
