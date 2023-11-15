@@ -6,13 +6,11 @@ import { cookies } from "next/headers";
 import { Suspense } from "react";
 
 const ProductDetailPage = async ({
-  params,
-  locale,
+  params: { locale, slug },
 }: {
-  params: { slug: string[] };
-  locale: string;
+  params: { locale: string; slug: string[] };
 }) => {
-  const productId = params.slug[1] ?? "";
+  const productId = slug[1] ?? "";
   const supabase = createServerComponentClient({ cookies });
   const { data: products } = await supabase
     .from("products")
@@ -39,11 +37,7 @@ const ProductDetailPage = async ({
 
       {products[0].category && (
         <Suspense fallback={<ProductCardSkeleton />}>
-          <RelatedProducts
-            productId={id}
-            category={category}
-            locale={locale}
-          />
+          <RelatedProducts productId={id} category={category} locale={locale} />
         </Suspense>
       )}
     </div>
