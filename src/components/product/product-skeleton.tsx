@@ -1,9 +1,9 @@
 export const ProductCardSkeleton = () => {
   return (
-    <div className="h-72 max-h-[18rem] flex flex-col gap-2 pb-2 animate-pulse">
+    <div className="shadow-md group h-[13rem] max-h-[13rem] md:h-[20rem] md:max-h-[20rem] flex flex-col gap-1 p-1 rounded-lg group relative z-0 animate-pulse">
       <div className="flex-grow bg-gray-200" />
       <div className="w-full h-10 flex items-center">
-        <div className="flex-grow bg-gray-200 h-4"></div>
+        <div className="flex-grow bg-gray-200 h-6"></div>
       </div>
     </div>
   );

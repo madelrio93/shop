@@ -14,6 +14,7 @@
     "@supabase/supabase-js": "^2.38.4",
     "next": "latest",
     "next-i18n-router": "^5.0.1",
+    "plaiceholder": "^3.0.0",
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^7.48.2",
@@ -21,6 +22,7 @@
     "react-intl": "^6.5.1",
     "react-multi-carousel": "^2.8.4",
     "react-responsive-carousel": "^3.2.23",
+    "sharp": "^0.32.6",
     "zod": "^3.22.4"
   },
   "devDependencies": {

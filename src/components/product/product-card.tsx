@@ -1,9 +1,10 @@
+import getBase64 from "@/lib/getLocaleBase64";
 import { getImageURL } from "@/lib/utils";
 import { ProductType } from "@/type";
 import Image from "next/image";
 import Link from "next/link";
 
-export const ProductCard = ({
+export const ProductCard = async ({
   product: { id, title, category, price, images },
 }: {
   product: Pick<
@@ -11,9 +12,13 @@ export const ProductCard = ({
     "id" | "title" | "category" | "price" | "currency" | "images"
   >;
 }) => {
+
+  const imageURL = getImageURL(images[0], category);
+  const blurUrl = await getBase64(imageURL);
+
   return (
     <Link
-      className="shadow-md group h-[22rem] max-h-[22rem] flex flex-col gap-2 pb-2 bg-white rounded-lg group relative z-0 pt-2"
+      className="shadow-md group h-[13rem] max-h-[13rem] md:h-[20rem] md:max-h-[20rem] flex flex-col gap-2 p-1 bg-white rounded-lg group relative z-0 "
       href={`/product/${category.toLowerCase()}/${id}`}
     >
       <div className="overflow-hidden flex-grow relative">
@@ -22,7 +27,9 @@ export const ProductCard = ({
             className="h-full w-full object-cover group-hover:scale-110 transition rounded"
             src={getImageURL(images[0], category)}
             alt={title}
-            loading="lazy"
+            placeholder="blur"
+            blurDataURL={blurUrl}
+            sizes="100%"
             fill
           />
         )}
