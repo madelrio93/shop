@@ -3,19 +3,22 @@
 @tailwind utilities;
 
 :root {
-    --primary-color-main: #df039f;
-    --primary-color-light:#f505af;
-    --primary-color-dark: #A90576;
-    --disabled-color: #ff5fd0;
+  --primary-color-main: #df039f;
+  --primary-color-light: #f505af;
+  --primary-color-dark: #a90576;
+  --disabled-color: #ff5fd0;
+  --bg-main: #fafafa;
+  --bg-second: #f2f2f2;
+  --bg-card: #ffffff;
 }
 
 @layer utilities {
-    .hiddenScrollbar::-webkit-scrollbar {
-      display: none;
-    }
+  .hiddenScrollbar::-webkit-scrollbar {
+    display: none;
   }
+}
 
-  /* PRODUCT DETAILS CAROUSEL STYLING CUSTOMIZATION START */
+/* PRODUCT DETAILS CAROUSEL STYLING CUSTOMIZATION START */
 .productCarousel.carousel-root {
   display: flex;
   flex-direction: row-reverse;
@@ -68,24 +71,24 @@
 }
 @media screen and (max-width: 767px) {
   .productCarousel.carousel-root {
-      flex-direction: column;
+    flex-direction: column;
   }
   .productCarousel.carousel-root .carousel .thumb {
-      border: 0;
-      padding: 0;
+    border: 0;
+    padding: 0;
   }
 }
 @media screen and (min-width: 768px) {
   .productCarousel.carousel-root .carousel .thumbs {
-      transform: none !important;
-      flex-direction: column;
-      display: flex;
-      gap: 10px;
+    transform: none !important;
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
   }
   .productCarousel.carousel-root .carousel .thumb {
-      border: 0;
-      padding: 0;
-      margin: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
   }
 }
 /* PRODUCT DETAILS CAROUSEL STYLING CUSTOMIZATION END */

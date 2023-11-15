@@ -27,6 +27,10 @@ const config: Config = {
         "2xl": "14rem",
       },
     },
+    fontFamily: {
+      "primary": "var(--font-montserrat)",
+      "second": "var(--font-roboto_c)"
+    }
   },
   plugins: [],
 }

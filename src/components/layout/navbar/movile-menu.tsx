@@ -64,7 +64,7 @@ export const MovileMenu = () => {
       <button
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
-        className="flex h-11 w-11 items-center justify-center "
+        className="flex h-8 w-8 items-center justify-center bg-[var(--bg-second)] rounded-full"
       >
         <GiHamburgerMenu className="w-5 h-5" />
       </button>

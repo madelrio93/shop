@@ -4,6 +4,7 @@ import { Menu } from "./menu";
 import { AiFillLock } from "react-icons/ai";
 import { MovileMenu } from "./movile-menu";
 import Link from "next/link";
+import LogoImg from '../../../../public/logo.jpg'
 
 const menu = ["Inicio", "Categorías", "Quienes Somos"];
 const categories = [
@@ -18,16 +19,18 @@ export const Navbar = async ({ locale }: { locale: Locale }) => {
   const translate = await getTranslation(locale);
 
   return (
-    <nav className="md:py-1 shadow-lg bg-white">
+    <nav className="md:py-1 bg-[var(--bg-main)] h-16">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex-grow basis-0 py-1 md:py-0">
+        <div className="flex-grow basis-0 pt-1 md:py-0">
           <Link href={"/"}>
             <Image
-              className="object-cover"
-              src={"/logo.jpg"}
+              className="object-cover w-100% h-100%"
+              src={LogoImg}
               alt={translate.site.description}
-              width={100}
-              height={100}
+              width={105}
+              height={105}
+              quality={100}
+              placeholder="blur"
               priority
             />
           </Link>

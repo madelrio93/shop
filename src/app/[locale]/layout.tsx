@@ -1,13 +1,11 @@
+import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { ServerIntlProvider } from "@/components/providers/server-intl-provider";
 import { Locale, getTranslation, i18nConfig } from "@/i18nConfig";
+import { montserrat, roboto_c } from "@/lib/fonts";
 import { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import { Suspense } from "react";
-import { Footer } from "@/components/layout/footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
 
 export const generateMetadata = async ({
   params: { locale },
@@ -51,15 +49,15 @@ const RootLayout = async ({
   const translate = await getTranslation(locale as Locale);
 
   return (
-    <html lang={locale} className={inter.className}>
-      <body className="bg-gray-100">
+    <html lang={locale} className={`${montserrat.variable} ${roboto_c.variable}`}>
+      <body className="bg-[var(--bg-second)]">
         <Navbar {...{ locale }} />
-        <main className="">
+        <main className="min-h-[calc(100vh-16rem)] pb-4">
           <ServerIntlProvider translations={translate} locale={locale}>
             <Suspense>{children}</Suspense>
           </ServerIntlProvider>
         </main>
-        <Footer {...{ locale }}/>
+        <Footer {...{ locale }} />
       </body>
     </html>
   );

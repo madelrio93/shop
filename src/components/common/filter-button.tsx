@@ -1,62 +1,48 @@
 "use client";
 
+import { categories } from "@/config";
 import { Popover, Transition } from "@headlessui/react";
 import { usePathname, useRouter } from "next/navigation";
-import { ChangeEvent, DOMAttributes, Fragment, useEffect, useState } from "react";
-import { BiSortAlt2 } from "react-icons/bi";
+import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from "react";
+import { MdFilterAlt } from "react-icons/md";
 
-const categoriesPath = [
-  {
-    label: "Ropa",
-    category: "ropa",
-  },
-  {
-    label: "Zapatos",
-    category: "zapatos",
-  },
-  {
-    label: "Maquillajes - Facial",
-    category: "maquillajes",
-  },
-  {
-    label: "Hogar",
-    category: "hogar",
-  },
-  {
-    label: "Otros",
-    category: "otros",
-  },
-];
-
-export const FilterButton = ({ text, position }: { text: string, position: 'left' | 'right'}) => {
+export const FilterButton = ({
+  text,
+  position,
+}: {
+  text: string;
+  position: "left" | "right";
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const [selected, setSelected] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (selected.length === categoriesPath.length || selected.length === 0) {
+  const handleOnChecked = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const { checked, name } = target;
+
+    const newValues = !checked
+      ? selected.filter((v) => v !== name)
+      : [...selected, name];
+
+    setSelected(newValues);
+  };
+
+  const filterData = () => {
+    if (selected.length === categories.length || selected.length === 0) {
       router.push(`${pathname}`);
     } else {
       router.push(`${pathname}?category=${[selected]}`);
+      router.refresh();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected]);
-
-  const handleChecked = (category: string) => () => {
-    const isChecked = selected.includes(category);
-
-    setSelected(
-      isChecked ? selected.filter((v) => v !== category) : [...selected, category]
-    );
   };
 
   return (
     <Popover className="relative">
-      {() => (
+      {({ close }) => (
         <>
-          <Popover.Button className="bg-white focus:border-none flex gap-1 items-center px-3 py-1.5 rounded text-xs md:text-sm font-semibold">
+          <Popover.Button className="bg-[var(--bg-main)] focus:border-none flex gap-1 items-center px-3 py-1.5 rounded text-xs md:text-sm font-primary shadow-md">
             {text}
-            <BiSortAlt2 className="text-[var(--primary-color-main)] w-5 h-5" />
+            <MdFilterAlt className="text-[var(--primary-color-main)] w-4 h-4" />
           </Popover.Button>
           <Transition
             as={Fragment}
@@ -69,84 +55,46 @@ export const FilterButton = ({ text, position }: { text: string, position: 'left
           >
             <Popover.Panel className={`absolute z-10 ${position}-0`}>
               <div className="overflow-hidden rounded-lg shadow-lg bg-[#ebebeb] w-60 px-1 pt-2">
-                {categoriesPath.map((c) => (
-                  <div className="py-1 mb-2 px-2 rounded flex items-center cursor-pointer hover:bg-[#e0e0e0]" key={c.category} onClick={handleChecked(c.category)}>
-                    <input
-                      id="default-checkbox"
-                      type="checkbox"
-                      name={c.category}
-                      defaultChecked={selected.includes(c.category)}    
-                      className="w-3 h-3 rounded cursor-pointer accent-[var(--primary-color-light)]"
-                    />
-                    <label
-                      htmlFor="default-checkbox"
-                      className="ms-2 text-sm font-medium text-zinc-600"
+                <form
+                  className="pb-3"
+                  onSubmit={(e: FormEvent<HTMLFormElement>) => {
+                    e.preventDefault();
+                    filterData();
+                    close();
+                  }}
+                >
+                  {categories.map((c) => (
+                    <div
+                      className="py-1 mb-2 px-2 rounded flex items-center cursor-pointer hover:bg-[#e0e0e0]"
+                      key={c.path}
                     >
-                      {c.label}
-                    </label>
+                      <input
+                        className="w-3 h-3 rounded cursor-pointer accent-[var(--primary-color-light)]"
+                        id="default-checkbox"
+                        type="checkbox"
+                        name={c.path}
+                        onChange={handleOnChecked}
+                        checked={selected.includes(c.path)}
+                      />
+                      <label
+                        htmlFor="default-checkbox"
+                        className="ms-2 text-sm font-primary font-medium text-zinc-600"
+                      >
+                        {c.name}
+                      </label>
+                    </div>
+                  ))}
+                  <div className="text-center font-primary">
+                    <button className="" type="submit">
+                      Aplicar
+                    </button>
                   </div>
-                ))}
+                </form>
               </div>
             </Popover.Panel>
           </Transition>
         </>
       )}
-
-      {/**<input
-                      id="default-checkbox"
-                      type="checkbox"
-                      value=""
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                    />
-                    <label
-                      htmlFor="default-checkbox"
-                      className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Default checkbox
-                    </label> */}
-      {/* <Menu as="div" className="relative right-0 inline-block text-left z-10 ">
-        <div>
-          <Menu.Button className="bg-white py-1 px-2 flex gap-1 items-center text-xs md:text-sm shadow-sm">
-           
-          </Menu.Button>
-        </div>
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="origin-right absolute w-56 bg-[#c7c7c7] rounded-md shadow-lg">
-            <div className="px-1 py-1 ">
-              {categoriesPath.map((item) => (
-                <Menu.Item key={item.label}>
-                  {({ active }) => (
-                    <div className="group flex w-full items-center rounded-md px-2 py-2 text-sm font-normal">
-                      <div className="flex items-center mb-4">
-                        <input
-                          id="default-checkbox"
-                          type="checkbox"
-                          value=""
-                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                        />
-                        <label
-                          htmlFor="default-checkbox"
-                          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                        >
-                          Default checkbox
-                        </label>
-                      </div>
-                    </div>
-                  )}
-                </Menu.Item>
-              ))}
-            </div>
-          </Menu.Items>
-        </Transition>
-      </Menu> */}
     </Popover>
   );
 };

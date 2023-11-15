@@ -7,7 +7,7 @@ export const Footer = async ({ locale }: { locale: string }) => {
   const translate = await getTranslation(locale);
 
   return (
-    <div className="mt-12 bg-white py-5">
+    <footer className="bg-white py-5">
       <div className="container flex gap-5">
         <div>
           <Link href={"/"}>
@@ -32,6 +32,6 @@ export const Footer = async ({ locale }: { locale: string }) => {
           </ul>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
