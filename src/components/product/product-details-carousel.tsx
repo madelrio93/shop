@@ -12,14 +12,14 @@ export const ProductDetailsCarousel = ({
   images: string[];
 }) => {
   return (
-    <div className="text-[20px] w-full max-w-[1360px] top-[50px] z-0">
+    <div className="text-[20px] w-full max-w-[1360px]">
       <Carousel
-        showIndicators={false}
-        showArrows={false}
-        showStatus={false}
-        autoPlay
-        infiniteLoop
         className={`productCarousel`}
+        showIndicators={false}
+        showArrows={true}
+        showStatus={false}
+        preventMovementUntilSwipeScrollTolerance
+        centerSlidePercentage={10}
       >
         {images?.map((name) => (
           // eslint-disable-next-line @next/next/no-img-element

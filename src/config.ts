@@ -22,7 +22,7 @@ export const categories = [
   },
   {
     name: "Otros",
-    img: "/categories/clothes.jpg",
+    img: "/categories/others.jpg",
     path: "otros",
   },
 ];

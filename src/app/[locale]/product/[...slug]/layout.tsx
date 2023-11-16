@@ -72,7 +72,7 @@ const ProductLayout = ({
           </h4>
         </div>
       </div>
-      <div className="container mt-5">
+      <div className="container mt-3">
         <div className="">
           <Suspense fallback={<ProductDetailSkeleton />}>{children}</Suspense>
         </div>

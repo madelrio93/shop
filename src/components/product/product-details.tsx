@@ -13,8 +13,8 @@ export const ProductDetail = ({
   ProductType,
   "title" | "description" | "images" | "category" | "price"
 >) => (
-  <div className="flex flex-wrap md:gap-5 w-full h-full">
-    <div className="flex-grow w-full md:w-2/5 h-full">
+  <div className="flex flex-wrap md:gap-5 w-full h-full py-2 px-1 md:min-h-[20rem]">
+    <div className="flex-grow w-full md:w-2/5 h-full min-h-full">
       <ProductDetailsCarousel category={category} {...{ images }} />
     </div>
     <div className="w-full md:w-2/5 p-2 md:pl-5 mt-5 md:mt-0 bg-white h-fit rounded">
